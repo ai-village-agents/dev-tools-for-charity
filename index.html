@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JSON Formatter & Validator - AI Village Charity Tool</title>
+    <style>
+        :root {
+            --primary: #d9381e;
+            --secondary: #1a1a1a;
+            --bg: #f4f4f4;
+            --text: #333;
+        }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            line-height: 1.6;
+            margin: 0;
+            padding: 0;
+            background-color: var(--bg);
+            color: var(--text);
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+        .banner {
+            background-color: var(--primary);
+            color: white;
+            text-align: center;
+            padding: 1rem;
+            font-weight: bold;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        .banner a {
+            color: white;
+            text-decoration: underline;
+        }
+        .banner a:hover {
+            text-decoration: none;
+        }
+        .container {
+            max-width: 1200px;
+            margin: 2rem auto;
+            padding: 0 1rem;
+            flex-grow: 1;
+            width: 100%;
+            box-sizing: border-box;
+        }
+        h1 {
+            color: var(--secondary);
+            margin-bottom: 0.5rem;
+        }
+        .subtitle {
+            color: #666;
+            margin-bottom: 2rem;
+        }
+        .app-layout {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+            height: calc(100vh - 250px);
+            min-height: 500px;
+        }
+        @media (max-width: 768px) {
+            .app-layout {
+                grid-template-columns: 1fr;
+                height: auto;
+            }
+        }
+        .panel {
+            display: flex;
+            flex-direction: column;
+        }
+        .panel-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 0.5rem;
+            font-weight: bold;
+        }
+        textarea, pre {
+            width: 100%;
+            flex-grow: 1;
+            padding: 1rem;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            font-family: monospace;
+            font-size: 14px;
+            resize: none;
+            box-sizing: border-box;
+            background-color: white;
+            overflow: auto;
+            margin: 0;
+        }
+        textarea:focus {
+            outline: none;
+            border-color: var(--primary);
+            box-shadow: 0 0 0 2px rgba(217, 56, 30, 0.2);
+        }
+        .btn {
+            background-color: var(--secondary);
+            color: white;
+            border: none;
+            padding: 0.5rem 1rem;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 14px;
+            transition: background-color 0.2s;
+        }
+        .btn:hover {
+            background-color: #333;
+        }
+        .btn-primary {
+            background-color: var(--primary);
+        }
+        .btn-primary:hover {
+            background-color: #b52e18;
+        }
+        .controls {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1rem;
+            justify-content: center;
+        }
+        .error {
+            color: var(--primary);
+            font-weight: bold;
+            margin-top: 1rem;
+            padding: 1rem;
+            background-color: #fdd;
+            border-radius: 4px;
+            display: none;
+        }
+        footer {
+            text-align: center;
+            padding: 2rem;
+            background-color: var(--secondary);
+            color: white;
+            margin-top: auto;
+        }
+        footer a {
+            color: #ffcccb;
+        }
+        
+        /* MSF Logo styles */
+        .msf-logo-container {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 15px;
+            margin-top: 20px;
+        }
+        .msf-logo {
+            height: 40px;
+        }
+    </style>
+</head>
+<body>
+    <div class="banner">
+        🚑 We are raising money for Doctors Without Borders! 
+        <a href="https://ai-village-agents.github.io/ai-village-charity-2026/appeal.html" target="_blank">Help us reach our goal</a> | 
+        <a href="https://ai-village-agents.github.io/ai-village-charity-2026/matching.html" target="_blank">Check if your employer matches</a>
+    </div>
+
+    <div class="container">
+        <h1>JSON Formatter & Validator</h1>
+        <div class="subtitle">A free developer tool provided by the AI Village team.</div>
+        
+        <div class="app-layout">
+            <div class="panel">
+                <div class="panel-header">
+                    <span>Input JSON</span>
+                    <button class="btn" id="btn-clear">Clear</button>
+                </div>
+                <textarea id="input" placeholder="Paste your raw JSON here..."></textarea>
+            </div>
+            
+            <div class="panel">
+                <div class="panel-header">
+                    <span>Formatted Output</span>
+                    <button class="btn" id="btn-copy">Copy to Clipboard</button>
+                </div>
+                <pre id="output">Result will appear here...</pre>
+            </div>
+        </div>
+        
+        <div id="error-message" class="error"></div>
+        
+        <div class="controls">
+            <button class="btn btn-primary" id="btn-format">Format & Validate</button>
+            <button class="btn" id="btn-minify">Minify</button>
+        </div>
+        
+        <div style="margin-top: 3rem; text-align: center; padding: 2rem; background: white; border-radius: 8px; box-shadow: 0 2px 10px rgba(0,0,0,0.05);">
+            <h2 style="margin-top: 0;">Have an open source bug you need fixed?</h2>
+            <p>Check out our <strong>Donate a Bug</strong> initiative!</p>
+            <p>We'll fix an issue in your repository if you make a donation to our MSF campaign.</p>
+            <a href="https://github.com/ai-village-agents/dev-tools-for-charity/issues/new?template=donate-a-bug.yml" class="btn btn-primary" target="_blank" style="text-decoration: none; display: inline-block; margin-top: 10px;">Submit a Bug Request</a>
+        </div>
+    </div>
+
+    <footer>
+        <p>Built with ❤️ by Gemini 3.1 Pro and the AI Village Team</p>
+        <p><a href="https://github.com/ai-village-agents/dev-tools-for-charity" target="_blank">View on GitHub</a> • <a href="https://dev.to/gemini31pro/code-for-charity-ai-scripting-code-reviews-for-msf-donations-2fo9" target="_blank">Code for Charity Initiative</a></p>
+    </footer>
+
+    <script>
+        const input = document.getElementById('input');
+        const output = document.getElementById('output');
+        const errorMsg = document.getElementById('error-message');
+        const btnFormat = document.getElementById('btn-format');
+        const btnMinify = document.getElementById('btn-minify');
+        const btnClear = document.getElementById('btn-clear');
+        const btnCopy = document.getElementById('btn-copy');
+
+        function processJson(spaces) {
+            errorMsg.style.display = 'none';
+            const val = input.value.trim();
+            
+            if (!val) {
+                output.textContent = 'Please enter some JSON first.';
+                return;
+            }
+            
+            try {
+                const parsed = JSON.parse(val);
+                output.textContent = JSON.stringify(parsed, null, spaces);
+            } catch (e) {
+                errorMsg.textContent = 'Invalid JSON: ' + e.message;
+                errorMsg.style.display = 'block';
+                output.textContent = '';
+            }
+        }
+
+        btnFormat.addEventListener('click', () => processJson(4));
+        btnMinify.addEventListener('click', () => processJson(0));
+        
+        btnClear.addEventListener('click', () => {
+            input.value = '';
+            output.textContent = 'Result will appear here...';
+            errorMsg.style.display = 'none';
+        });
+
+        btnCopy.addEventListener('click', () => {
+            const text = output.textContent;
+            if (text && text !== 'Result will appear here...' && !text.startsWith('Please enter')) {
+                navigator.clipboard.writeText(text).then(() => {
+                    const originalText = btnCopy.textContent;
+                    btnCopy.textContent = 'Copied!';
+                    setTimeout(() => {
+                        btnCopy.textContent = originalText;
+                    }, 2000);
+                });
+            }
+        });
+        
+        // Auto-format on paste
+        input.addEventListener('paste', () => {
+            setTimeout(() => {
+                if(input.value.trim() !== '') {
+                    processJson(4);
+                }
+            }, 100);
+        });
+    </script>
+</body>
+</html>
