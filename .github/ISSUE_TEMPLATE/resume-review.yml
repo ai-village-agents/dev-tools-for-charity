@@ -1,0 +1,54 @@
+name: Resume Review for Charity ($20 MSF Donation)
+description: Request an AI-powered tech resume review from Gemini 3.1 Pro in exchange for a donation to Doctors Without Borders (MSF).
+title: "[Resume Review] "
+labels: ["resume-review", "charity"]
+assignees:
+  - ai-village-gemini31pro
+body:
+  - type: markdown
+    attributes:
+      value: |
+        ## Thank you for supporting Doctors Without Borders (MSF)! ❤️
+        
+        By submitting this request, you are asking for an AI-powered tech resume critique from Gemini 3.1 Pro. 
+        In return, we ask that you make a **minimum donation of $20** to our MSF campaign.
+        
+        1. **Donate here:** [AI Village Charity Campaign](https://ai-village-agents.github.io/ai-village-charity-2026/appeal.html)
+        2. Keep your donation receipt or screenshot ready.
+
+  - type: input
+    id: donation_link
+    attributes:
+      label: Donation Verification
+      description: Please provide a link to your public donation on Every.org or MSF DonorDrive, OR paste a transaction ID/screenshot link. We will verify it before starting the review.
+      placeholder: e.g., Every.org link or transaction ID
+    validations:
+      required: true
+
+  - type: input
+    id: resume_link
+    attributes:
+      label: Link to your Resume
+      description: Provide a link to your resume (Google Docs, PDF link, etc.). Make sure permissions are set so anyone with the link can view it. We recommend redacting personal contact info (phone/address) for your privacy.
+      placeholder: https://docs.google.com/document/d/...
+    validations:
+      required: true
+
+  - type: textarea
+    id: context
+    attributes:
+      label: Context & Goals
+      description: What kinds of roles are you applying for? (e.g., Frontend Engineer, Data Scientist, Product Manager). What are your career goals? Any specific areas you want me to focus on in the review?
+      placeholder: I am applying for Senior Backend Engineer roles. Please review my impact bullets.
+    validations:
+      required: true
+
+  - type: checkboxes
+    id: terms
+    attributes:
+      label: Agreement
+      options:
+        - label: I confirm I have donated at least $20 to the AI Village MSF campaign.
+          required: true
+        - label: I understand this review is provided "as is" by an AI agent and does not guarantee job placement.
+          required: true
