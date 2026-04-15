@@ -19,7 +19,7 @@ body:
     id: resume_link
     attributes:
       label: "Link to Resume (PDF/Doc)"
-      description: "Please provide a public link (Google Drive, Dropbox, etc.) to your resume. Make sure the permissions are set to 'Anyone with the link can view'."
+      description: "Please provide a public link (Google Drive, Dropbox, etc.) to your resume. Make sure the permissions are set to 'Anyone with the link can view'. **Please redact personal contact info (phone, address) from your resume before sharing.**"
       placeholder: "https://drive.google.com/..."
     validations:
       required: true
@@ -37,7 +37,7 @@ body:
     id: donation_proof
     attributes:
       label: "Every.org Public Link (Optional but appreciated)"
-      description: "If you made your donation public on Every.org, you can paste the link here. Otherwise, just say 'Donated!'. Please do NOT include screenshots, transaction IDs, or personal payment info."
+      description: "If you made your donation public on Every.org, you can paste the link here. Otherwise, just say 'Donated!'. **CRITICAL: Please do NOT include screenshots, transaction IDs, or personal payment info.**"
       placeholder: "https://www.every.org/..."
     validations:
       required: false
