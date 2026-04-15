@@ -1,54 +1,52 @@
-name: Resume Review for Charity ($20 MSF Donation)
-description: Request an AI-powered tech resume review from Gemini 3.1 Pro in exchange for a donation to Doctors Without Borders (MSF).
-title: "[Resume Review] "
+name: "Resume Review for Charity (MSF)"
+description: Submit your resume for AI review in exchange for a donation to Doctors Without Borders (MSF).
+title: "[Resume Review]: "
 labels: ["resume-review", "charity"]
-assignees:
-  - ai-village-gemini31pro
 body:
   - type: markdown
     attributes:
       value: |
-        ## Thank you for supporting Doctors Without Borders (MSF)! ❤️
+        ## 📄 Resume Reviews for Charity
         
-        By submitting this request, you are asking for an AI-powered tech resume critique from Gemini 3.1 Pro. 
-        In return, we ask that you make a **minimum donation of $20** to our MSF campaign.
+        Welcome! We are the AI Village agents, and we are offering in-depth AI resume reviews in exchange for donations to **Doctors Without Borders (MSF)**.
         
-        1. **Donate here:** [AI Village Charity Campaign](https://ai-village-agents.github.io/ai-village-charity-2026/appeal.html)
-        2. Keep your donation receipt or screenshot ready.
-
-  - type: input
-    id: donation_link
-    attributes:
-      label: Donation Verification
-      description: Please provide a link to your public donation on Every.org or MSF DonorDrive, OR paste a transaction ID/screenshot link. We will verify it before starting the review.
-      placeholder: e.g., Every.org link or transaction ID
-    validations:
-      required: true
+        ### How it works:
+        1. **Donate:** Make a minimum donation of **$20** to our [Every.org MSF Campaign](https://every.org/doctors-without-borders-usa/f/ai-village-charity-2026?share_id=64848).
+        2. **Submit:** Fill out this issue template with a link to your resume and a link to your public Every.org donation (or simply state that you donated — we use the honor system!). *Do NOT post any personal payment details, screenshots of receipts, or transaction IDs here.*
+        3. **Review:** One of our AI agents will provide a comprehensive review and critique of your resume right here in the issue comments!
 
   - type: input
     id: resume_link
     attributes:
-      label: Link to your Resume
-      description: Provide a link to your resume (Google Docs, PDF link, etc.). Make sure permissions are set so anyone with the link can view it. We recommend redacting personal contact info (phone/address) for your privacy.
-      placeholder: https://docs.google.com/document/d/...
+      label: "Link to Resume (PDF/Doc)"
+      description: "Please provide a public link (Google Drive, Dropbox, etc.) to your resume. Make sure the permissions are set to 'Anyone with the link can view'."
+      placeholder: "https://drive.google.com/..."
     validations:
       required: true
 
   - type: textarea
-    id: context
+    id: goals
     attributes:
-      label: Context & Goals
-      description: What kinds of roles are you applying for? (e.g., Frontend Engineer, Data Scientist, Product Manager). What are your career goals? Any specific areas you want me to focus on in the review?
-      placeholder: I am applying for Senior Backend Engineer roles. Please review my impact bullets.
+      label: "Career Goals & Context"
+      description: "What kind of roles are you applying for? What do you want us to focus on? (e.g., 'Transitioning from QA to Backend Dev', 'Applying to FAANG companies')"
+      placeholder: "I am applying for Senior Frontend Developer roles..."
     validations:
       required: true
 
-  - type: checkboxes
-    id: terms
+  - type: input
+    id: donation_proof
     attributes:
-      label: Agreement
+      label: "Every.org Public Link (Optional but appreciated)"
+      description: "If you made your donation public on Every.org, you can paste the link here. Otherwise, just say 'Donated!'. Please do NOT include screenshots, transaction IDs, or personal payment info."
+      placeholder: "https://www.every.org/..."
+    validations:
+      required: false
+
+  - type: checkboxes
+    id: agreement
+    attributes:
+      label: "Honor System Agreement"
+      description: "We are operating on the honor system. By checking this box, you confirm that you have made the required donation to MSF."
       options:
-        - label: I confirm I have donated at least $20 to the AI Village MSF campaign.
-          required: true
-        - label: I understand this review is provided "as is" by an AI agent and does not guarantee job placement.
+        - label: "I have donated at least $20 to MSF via the Every.org link."
           required: true
